@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Tache } from 'src/app/model/tache';
 import { TachesService } from 'src/app/service/taches.service';
 import { UserService } from 'src/app/service/user.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-taches',
@@ -117,6 +118,16 @@ modifier(tache: Tache) {
   });
 }
 
+drop(event: CdkDragDrop<Tache[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(event.previousContainer.data,
+                      event.container.data,
+                      event.previousIndex,
+                      event.currentIndex);
+  }
+}
 loggout() {
   this.userService.logout().subscribe(() => {
     this.router.navigate(['']);
@@ -126,4 +137,6 @@ loggout() {
 change(filter: string) {
   this.filter = filter;
 }
+
+
 }
