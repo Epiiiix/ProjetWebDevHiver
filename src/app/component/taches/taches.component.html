@@ -30,7 +30,7 @@
                             
 
                         </div>
-                        <div style=" opacity: 0;">saveeeeeeeeeeeeeeeeee</div>
+                        <div *ngIf="Undefined.length === 0" style=" opacity: 0;">Liste vide</div>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                             <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' " style="padding: 0 10px;">{{tache.titre}}</div>
                             <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
                         </div>
-                        <div style=" opacity: 0;">saveeeeeeeeeeeeeeeeee</div>
+                        <div *ngIf="EnAttente.length === 0" style=" opacity: 0;">Liste vide</div>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                             <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' " style="padding: 0 10px;">{{tache.titre}}</div>
                             <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
                         </div>
-                        <div style=" opacity: 0;">saveeeeeeeeeeeeeeeeee</div>
+                        <div *ngIf="EnCours.length === 0" style=" opacity: 0;">Liste vide</div>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                             <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' " style="padding: 0 10px;">{{tache.titre}}</div>
                             <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'>Supprimer</button>
                         </div>
-                        <div style=" opacity: 0;">saveeeeeeeeeeeeeeeeee</div>
+                        <div *ngIf="Termine.length === 0" style=" opacity: 0;">Liste vide</div>
                     </div>
                 </div>
             </div>
