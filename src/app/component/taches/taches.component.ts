@@ -56,8 +56,6 @@ export class TachesComponent implements OnInit {
     });
   }
 
-
-
   ajouter(statut: string) {
     switch (statut) {
       case 'Undefined':
@@ -133,6 +131,7 @@ export class TachesComponent implements OnInit {
       this.tacheService.updateTaches(tache).subscribe();
     }
   }
+
   loggout() {
     this.userService.logout().subscribe(() => {
       this.router.navigate(['']);
