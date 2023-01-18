@@ -5,8 +5,27 @@
             <button class="btn btn-outline-secondary m-1" (click)="loggout()">Logout</button>
 
         </div>
-        
-        <div class="d-flex flex-row" style="justify-content: space-evenly;">
+        <div class="d-flex flex-row justify-content-center ">
+            <input id="nomListe" class="saisieInput" type="text" name="liste" placeholder="liste"
+                [(ngModel)]="newListe.titre">
+
+            <button id="ajouterListe" class="btn btn-primary" value="Ajouter" (click)='ajouterListe()'>Ajout
+                Liste</button>
+        </div>
+        <div class="d-flex flex-row justify-content-between m-1" *ngFor="let liste of listes">
+            <div class="d-flex flex-column justify-content-between m-1">
+                <h1>{{liste.titre}}</h1>
+                <button class="btn btn-outline-danger m-1" (click)='supprimerListe(liste)'>Supprimer</button> 
+                <div class="d-flex flex-row justify-content-center ">
+                    <!-- <input id="inputAjoutTacheUndefined" class="saisieInput" type="text" name="tache" placeholder="tache"
+                        [(ngModel)]="newTacheUndefined.titre">
+
+                    <button id="buttonAjoutTacheUndefined" class="btn btn-primary" value="Ajouter"
+                        (click)='ajouter("Undefined")'>Ajouter</button> -->
+                </div>
+            </div>
+        </div>
+        <!-- <div class="d-flex flex-row" style="justify-content: space-evenly;">
             <div>
                 <h1>Undefined</h1>
                 <div class="d-flex flex-row justify-content-center ">
@@ -113,6 +132,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

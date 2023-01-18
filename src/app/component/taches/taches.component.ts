@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tache } from 'src/app/model/tache';
 import { TachesService } from 'src/app/service/taches.service';
+import { ListesService } from 'src/app/service/listes.service';
 import { UserService } from 'src/app/service/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Liste } from 'src/app/model/liste';
 
 @Component({
   selector: 'app-taches',
@@ -39,10 +41,24 @@ export class TachesComponent implements OnInit {
     statut: 'Termine'
   };
 
+  listes: Array<Liste> = [];
+  newListe : Liste = {
+    titre:'',
+    username: ''
+  };
+
+  taches : Array<Tache> = [];
+  newTache: Tache = {
+    titre: '',
+    termine: false,
+    statut: ''
+  }
+
   filter: string = 'Tous';
 
   constructor(private tacheService: TachesService,
     private userService: UserService,
+    private listeService: ListesService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -54,41 +70,31 @@ export class TachesComponent implements OnInit {
         this.Termine = data.filter(t => t.statut === 'Termine');
       }
     });
+    this.listeService.getListes().subscribe({
+      next: (data : Array<Liste>) => {
+        this.listes = data;
+      }
+    });
   }
-
-  ajouter(statut: string) {
-    switch (statut) {
-      case 'Undefined':
-        this.tacheService.ajoutTaches(this.newTacheUndefined).subscribe({
-          next: (data) => {
-            this.Undefined.push(data);
-          }
-        });
-        break;
-      case 'En Attente':
-        this.tacheService.ajoutTaches(this.newTacheEnAttente).subscribe({
-          next: (data) => {
-            this.EnAttente.push(data);
-          }
-        });
-        break;
-      case 'En Cours':
-        this.tacheService.ajoutTaches(this.newTacheEnCours).subscribe({
-          next: (data) => {
-            this.EnCours.push(data);
-          }
-        });
-        break;
-      case 'Termine':
-        this.tacheService.ajoutTaches(this.newTacheTermine).subscribe({
-          next: (data) => {
-            this.Termine.push(data);
-          }
-        });
-        break;
-    }
+  ajouterListe() {
+    this.listeService.ajoutListes(this.newListe).subscribe({
+      next: (data) => {
+      }
+    })
   }
-
+  // ajouterTache() {
+  //   this.tacheService.ajoutTaches(this.newTache).subscribe({
+  //     next: (data) => {
+  //       this.newListe.push(data);
+  //     }
+  //   });
+  // }
+  supprimerListe(liste : Liste) {
+      this.listeService.removeListes(liste).subscribe({
+        next : (data) => {
+        }
+      });
+  }
   supprimer(tache: Tache): void {
     this.tacheService.removeTaches(tache).subscribe({
       next: (data) => {
