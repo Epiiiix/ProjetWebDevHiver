@@ -6,6 +6,7 @@ import { ListesService } from 'src/app/service/listes.service';
 import { UserService } from 'src/app/service/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Liste } from 'src/app/model/liste';
+import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-taches',
@@ -64,10 +65,11 @@ export class TachesComponent implements OnInit {
   ngOnInit(): void {
     this.tacheService.getTaches().subscribe({
       next: (data: Array<Tache>) => {
-        this.Undefined = data.filter(t => t.statut === 'Undefined');
+        /*this.Undefined = data.filter(t => t.statut === 'Undefined');
         this.EnAttente = data.filter(t => t.statut === 'En Attente');
         this.EnCours = data.filter(t => t.statut === 'En Cours');
-        this.Termine = data.filter(t => t.statut === 'Termine');
+        this.Termine = data.filter(t => t.statut === 'Termine');*/
+        this.taches = data;
       }
     });
     this.listeService.getListes().subscribe({
@@ -79,26 +81,35 @@ export class TachesComponent implements OnInit {
   ajouterListe() {
     this.listeService.ajoutListes(this.newListe).subscribe({
       next: (data) => {
+        this.listes.push(data)
       }
     })
   }
-  // ajouterTache() {
-  //   this.tacheService.ajoutTaches(this.newTache).subscribe({
-  //     next: (data) => {
-  //       this.newListe.push(data);
-  //     }
-  //   });
-  // }
+  ajouterTache(statut: string) {
+    let task = this.newTache
+    task.statut = statut;
+    this.tacheService.ajoutTaches(task).subscribe({
+      next: (data) => {
+        this.taches.push(data);
+      }
+    });
+  }
   supprimerListe(liste : Liste) {
       this.listeService.removeListes(liste).subscribe({
         next : (data) => {
+          for(let tache of this.taches) {
+            if(tache.statut === liste.titre) {
+              this.supprimer(tache)
+            }
+          }
+          this.listes = this.listes.filter(t => liste._id != t._id);
         }
       });
   }
   supprimer(tache: Tache): void {
     this.tacheService.removeTaches(tache).subscribe({
       next: (data) => {
-        switch (tache.statut) {
+        /*switch (tache.statut) {
           case 'Undefined':
             this.Undefined = this.Undefined.filter(t => tache._id !== t._id);
             break;
@@ -111,7 +122,8 @@ export class TachesComponent implements OnInit {
           case 'Termine':
             this.Termine = this.Termine.filter(t => tache._id !== t._id);
             break;
-        }
+        }*/
+        this.taches = this.taches.filter(t => tache._id != t._id);
       }
     });
   }
