@@ -6,7 +6,6 @@ import { ListesService } from 'src/app/service/listes.service';
 import { UserService } from 'src/app/service/user.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Liste } from 'src/app/model/liste';
-import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-taches',
@@ -14,33 +13,33 @@ import { elementAt } from 'rxjs';
   styleUrls: ['./taches.component.css']
 })
 export class TachesComponent implements OnInit {
-  Undefined: Array<Tache> = [];
-  EnAttente: Array<Tache> = [];
-  EnCours: Array<Tache> = [];
-  Termine: Array<Tache> = [];
-  newTacheUndefined: Tache = {
-    titre: '',
-    termine: false,
-    statut: 'Undefined'
-  };
+  // Undefined: Array<Tache> = [];
+  // EnAttente: Array<Tache> = [];
+  // EnCours: Array<Tache> = [];
+  // Termine: Array<Tache> = [];
+  // newTacheUndefined: Tache = {
+  //   titre: '',
+  //   termine: false,
+  //   statut: 'Undefined'
+  // };
 
-  newTacheEnAttente: Tache = {
-    titre: '',
-    termine: false,
-    statut: 'En Attente'
-  };
+  // newTacheEnAttente: Tache = {
+  //   titre: '',
+  //   termine: false,
+  //   statut: 'En Attente'
+  // };
 
-  newTacheEnCours: Tache = {
-    titre: '',
-    termine: false,
-    statut: 'En Cours'
-  };
+  // newTacheEnCours: Tache = {
+  //   titre: '',
+  //   termine: false,
+  //   statut: 'En Cours'
+  // };
 
-  newTacheTermine: Tache = {
-    titre: '',
-    termine: false,
-    statut: 'Termine'
-  };
+  // newTacheTermine: Tache = {
+  //   titre: '',
+  //   termine: false,
+  //   statut: 'Termine'
+  // };
 
   listes: Array<Liste> = [];
   newListe : Liste = {
