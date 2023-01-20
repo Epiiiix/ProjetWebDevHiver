@@ -42,12 +42,12 @@ export class TachesComponent implements OnInit {
   // };
 
   listes: Array<Liste> = [];
-  newListe : Liste = {
-    titre:'',
+  newListe: Liste = {
+    titre: '',
     username: ''
   };
 
-  taches : Array<Tache> = [];
+  taches: Array<Tache> = [];
   newTache: Tache = {
     titre: '',
     termine: false,
@@ -72,7 +72,7 @@ export class TachesComponent implements OnInit {
       }
     });
     this.listeService.getListes().subscribe({
-      next: (data : Array<Liste>) => {
+      next: (data: Array<Liste>) => {
         this.listes = data;
       }
     });
@@ -93,17 +93,17 @@ export class TachesComponent implements OnInit {
       }
     });
   }
-  supprimerListe(liste : Liste) {
-      this.listeService.removeListes(liste).subscribe({
-        next : (data) => {
-          for(let tache of this.taches) {
-            if(tache.statut === liste.titre) {
-              this.supprimer(tache)
-            }
+  supprimerListe(liste: Liste) {
+    this.listeService.removeListes(liste).subscribe({
+      next: (data) => {
+        for (let tache of this.taches) {
+          if (tache.statut === liste.titre) {
+            this.supprimer(tache)
           }
-          this.listes = this.listes.filter(t => liste._id != t._id);
         }
-      });
+        this.listes = this.listes.filter(t => liste._id != t._id);
+      }
+    });
   }
   supprimer(tache: Tache): void {
     this.tacheService.removeTaches(tache).subscribe({
@@ -133,6 +133,16 @@ export class TachesComponent implements OnInit {
       next: (data) => {
       }
     });
+  }
+
+  listeLength(taches: Array<Tache>, liste: Liste) {
+    let index = 0
+    for (let tache of taches) {
+      if (tache.statut === liste.titre) {
+        index++
+      }
+    }
+    return index;
   }
 
   drop(event: CdkDragDrop<Tache[]>) {
