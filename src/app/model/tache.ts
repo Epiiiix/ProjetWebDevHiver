@@ -3,4 +3,5 @@ export interface Tache {
     titre:string;
     termine:boolean;
     statut: string;
+    user: string;
 }

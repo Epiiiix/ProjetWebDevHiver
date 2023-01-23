@@ -24,4 +24,15 @@ export class UserService {
     return this.http.get<void>('http://localhost:3000/isConnected', { withCredentials: true });
   }
 
+  signin(user: User): Observable<void> {
+    return this.http.post<void>('http://localhost:3000/signin', user, { withCredentials: true });
+  }
+
+  checkUser(user: User): Observable<void> {
+    return this.http.post<void>('http://localhost:3000/checkUser', user, { withCredentials: true });
+  }
+
+  getUser(): Observable<void> {
+    return this.http.get<void>('http://localhost:3000/getUser', { withCredentials: true });
+  }
 }

@@ -16,14 +16,15 @@ export class TachesComponent implements OnInit {
   listes: Array<Liste> = [];
   newListe: Liste = {
     titre: '',
-    username: ''
+    user: ''
   };
 
   taches: Array<Tache> = [];
   newTache: Tache = {
     titre: '',
     termine: false,
-    statut: ''
+    statut: '',
+    user: ''
   }
 
   filter: string = 'Tous';
@@ -52,7 +53,7 @@ export class TachesComponent implements OnInit {
       }
     })
   }
-  ajouterTache(statut: string) {
+  ajouterTache(statut: string) : void {
     let task = this.newTache
     task.statut = statut;
     this.tacheService.ajoutTaches(task).subscribe({
