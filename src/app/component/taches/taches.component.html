@@ -28,13 +28,16 @@
                             <div class="d-flex flex-row justify-content-between" style="align-items: center;"
                                 *ngFor="let tache of (taches | filtreTache:filter); let j = index;" cdkDrag>
                                 <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine"
-                                *ngIf="tache.statut===liste.titre">
+                                    *ngIf="tache.statut===liste.titre">
                                 <div [ngClass]="tache.termine? 'text-decoration-line-through' : '' "
-                                style="padding: 0 10px;" *ngIf="tache.statut===liste.titre">{{tache.titre}}
+                                    style="padding: 0 10px;" *ngIf="tache.statut===liste.titre">{{tache.titre}}
+                                </div>
+                                <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)'
+                                    *ngIf="tache.statut===liste.titre">Supprimer</button>
                             </div>
-                            <button class="btn btn-outline-danger m-1" (click)='supprimer(tache)' *ngIf="tache.statut===liste.titre">Supprimer</button>
-                        </div>
-                        <div *ngIf="listeLength(taches, liste) === 0" style="opacity: 33; display: flex; justify-content: center; align-items: center; min-height: 50px">Liste vide</div>
+                            <div *ngIf="listeLength(taches, liste) === 0"
+                                style="opacity: 33; display: flex; justify-content: center; align-items: center; min-height: 50px">
+                                Liste vide</div>
                         </div>
                     </div>
                 </div>
